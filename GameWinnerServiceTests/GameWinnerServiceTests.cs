@@ -10,6 +10,7 @@ namespace TicTacToeTests
 
         IGameWinnerService _gameWinnerService;
         private char[,] _gameBoard;
+        private char expected = 'X';
 
         [TestInitialize]
         public void SetupUnitTests()
@@ -23,14 +24,13 @@ namespace TicTacToeTests
         [TestMethod]
         public void NeitherPlayerHasThreeInARow()
         {
-            const char expected = ' ';
+            expected = ' ';
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void PlayerWithAllSpacesInTopRowIsWinner()
         {
-            const char expected = 'X';
             for (int i = 0; i < 3; i++)
             {
                 _gameBoard[0, i] = expected;
@@ -41,7 +41,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithAllSpacesInBottomRowIsWinner()
         {
-            const char expected = 'X';
             for (int i = 0; i < 3; i++)
             {
                 _gameBoard[2, i] = expected;
@@ -52,7 +51,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithAllSpacesInMiddleRowIsWinner()
         {
-            const char expected = 'X';
             for (int i = 0; i < 3; i++)
             {
                 _gameBoard[1, i] = expected;
@@ -63,7 +61,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithAllSpacesInFirstColumnIsWinner()
         {
-            const char expected = 'X';
             for (var columnIndex = 0; columnIndex < 3; columnIndex++)
             {
                 _gameBoard[columnIndex, 0] = expected;
@@ -74,7 +71,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithAllSpacesInThirdColumnIsWinner()
         {
-            const char expected = 'X';
             for (var columnIndex = 0; columnIndex < 3; columnIndex++)
             {
                 _gameBoard[columnIndex, 2] = expected;
@@ -85,7 +81,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithAllSpacesInSecondColumnIsWinner()
         {
-            const char expected = 'X';
             for (var columnIndex = 0; columnIndex < 3; columnIndex++)
             {
                 _gameBoard[columnIndex, 1] = expected;
@@ -96,7 +91,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithThreeInARowDiagonallyDownAndToRightIsWinner()
         {
-            const char expected = 'X';
             for (var cellIndex = 0; cellIndex < 3; cellIndex++)
             {
                 _gameBoard[cellIndex, cellIndex] = expected;
@@ -107,7 +101,6 @@ namespace TicTacToeTests
         [TestMethod]
         public void PlayerWithThreeInARowDiagonallyTopAndToLeftIsWinner()
         {
-            const char expected = 'X';
             for (var cellIndex = 0; cellIndex < 3; cellIndex++)
             {
                 _gameBoard[cellIndex, (2 - cellIndex)] = expected;

@@ -5,7 +5,8 @@ namespace TicTacToe.Services{
     public class GameWinnerService : IGameWinnerService{
 
         private const char SYMBOL_FOR_NO_WINNER = ' ';
-        private const char SYMBOL = 'X';
+        private const char SYMBOLX = 'X';
+        private const char SYMBOLO = 'O';
 
         public char Validate(char[,] gameBoard){
 
@@ -27,7 +28,9 @@ namespace TicTacToe.Services{
                 var columnOneChar = gameBoard[i, 0];
                 var columnTwoChar = gameBoard[i, 1];
                 var columnThreeChar = gameBoard[i, 2];
-                if (columnOneChar == SYMBOL && columnTwoChar == SYMBOL && columnThreeChar == SYMBOL){
+                if ((columnOneChar == SYMBOLX && columnTwoChar == SYMBOLX && columnThreeChar == SYMBOLX) ||
+                    (columnOneChar == SYMBOLO && columnTwoChar == SYMBOLO && columnThreeChar == SYMBOLO))
+                {
                     return columnOneChar;
                 }
             }
@@ -40,7 +43,9 @@ namespace TicTacToe.Services{
                 var rowOneChar = gameBoard[0, i];
                 var rowTwoChar = gameBoard[1, i];
                 var rowThreeChar = gameBoard[2, i];
-                if (rowOneChar == SYMBOL && rowTwoChar == SYMBOL && rowThreeChar == SYMBOL){
+                if ((rowOneChar == SYMBOLX && rowTwoChar == SYMBOLX && rowThreeChar == SYMBOLX) ||
+                    (rowOneChar == SYMBOLO && rowTwoChar == SYMBOLO && rowThreeChar == SYMBOLO))
+                {
                     return rowOneChar;
                 }
             }
