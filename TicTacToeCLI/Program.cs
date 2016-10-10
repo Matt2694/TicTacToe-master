@@ -15,8 +15,7 @@ namespace TicTacToeCLI{
                 "\nAlways type the coordinate in order of row followed by column\n" +
                 "For example, to put a mark in the top left box, you would type A1\n";
         private string gameBoard;
-
-
+        
         static void Main(string[] args){
 
             Program myProgram = new Program();
@@ -27,9 +26,6 @@ namespace TicTacToeCLI{
 
             bool running = true;
             string choice = "";
-            _gameBoard = new char[3, 3]{ { ' ', ' ', ' '},
-                                         { ' ', ' ', ' '},
-                                         { ' ', ' ', ' '}};
             UpdateGameBoard();
             ShowMenu(gameBoard);
             char symbol;
@@ -69,7 +65,6 @@ namespace TicTacToeCLI{
                 UpdateGameBoard();
                 turn++;
                 if (_gameWinnerService.Validate(_gameBoard) != ' '){
-                    running = false;
                     Console.Clear();
                     Console.WriteLine(gameBoard);
                     string winner = "";
@@ -81,11 +76,12 @@ namespace TicTacToeCLI{
                     Console.WriteLine("\nCongratulations, " + winner +
                                       " wins!\n\n\nPress any key to close the game");
                     Console.ReadKey();
+                    running = false;
                 }
                 else if (turn == 10){
                     Console.Clear();
                     Console.WriteLine(gameBoard);
-                    Console.WriteLine("It was a tie.\n\nPress any key to end the program");
+                    Console.WriteLine("It was a draw\n\nPress any key to end the program");
                     Console.ReadKey();
                     running = false;
                 }
@@ -130,11 +126,11 @@ namespace TicTacToeCLI{
 
         private void UpdateGameBoard(){
 
-            gameBoard = "\n\n    1   2   3\n\nA   " + _gameBoard[0, 0] + " | " + _gameBoard[0, 1] +
-                                " | " + _gameBoard[0, 2] + " \n" + "   ---+---+---\nB   " + _gameBoard[1, 0] +
-                                " | " + _gameBoard[1, 1] + " | " + _gameBoard[1, 2] + " \n" +
-                                "   ---+---+---\nC   " + _gameBoard[2, 0] + " | " + _gameBoard[2, 1] +
-                                " | " + _gameBoard[2, 2] + "\n\n";
+            gameBoard = "\n\n    1   2   3\n\nA   " + _gameBoard[0, 0] + " │ " + _gameBoard[0, 1] +
+                                " │ " + _gameBoard[0, 2] + " \n" + "   ───┼───┼───\nB   " + _gameBoard[1, 0] +
+                                " │ " + _gameBoard[1, 1] + " │ " + _gameBoard[1, 2] + " \n" +
+                                "   ───┼───┼───\nC   " + _gameBoard[2, 0] + " │ " + _gameBoard[2, 1] +
+                                " │ " + _gameBoard[2, 2] + "\n\n";
         }
 
         private void ShowMenu(string gameBoard){
