@@ -14,7 +14,9 @@ namespace TicTacToeCLI{
                 "Type the coordinates of the box you would like to place your mark in," +
                 "\nAlways type the coordinate in order of row followed by column\n" +
                 "For example, to put a mark in the top left box, you would type A1\n";
-        
+        private string gameBoard;
+
+
         static void Main(string[] args){
 
             Program myProgram = new Program();
@@ -28,12 +30,7 @@ namespace TicTacToeCLI{
             _gameBoard = new char[3, 3]{ { ' ', ' ', ' '},
                                          { ' ', ' ', ' '},
                                          { ' ', ' ', ' '}};
-            string gameBoard = "\n\n    1   2   3\n\nA   " + _gameBoard[0, 0] +
-                                   " | " + _gameBoard[0, 1] + " | " + _gameBoard[0, 2] + " \n" +
-                                   "   ---+---+---\nB   " + _gameBoard[1, 0] + " | " + _gameBoard[1, 1] +
-                                   " | " + _gameBoard[1, 2] + " \n" +
-                                   "   ---+---+---\nC   " + _gameBoard[2, 0] + " | " + _gameBoard[2, 1] +
-                                   " | " + _gameBoard[2, 2] + " \n\n";
+            UpdateGameBoard();
             ShowMenu(gameBoard);
             char symbol;
             int turn = 1;
@@ -69,11 +66,7 @@ namespace TicTacToeCLI{
                     case "end": running = false; break;
                     default: Console.WriteLine("\nInvalid input, please input a valid coordinate\n"); goto GetResponse;
                 }
-                gameBoard = "\n\n    1   2   3\n\nA   " + _gameBoard[0, 0] + " | " + _gameBoard[0, 1] +
-                                " | " + _gameBoard[0, 2] + " \n" + "   ---+---+---\nB   " + _gameBoard[1, 0] +
-                                " | " + _gameBoard[1, 1] + " | " + _gameBoard[1, 2] + " \n" +
-                                "   ---+---+---\nC   " + _gameBoard[2, 0] + " | " + _gameBoard[2, 1] +
-                                " | " + _gameBoard[2, 2] + "\n\n";
+                UpdateGameBoard();
                 turn++;
                 if (_gameWinnerService.Validate(_gameBoard) != ' '){
                     running = false;
@@ -83,7 +76,7 @@ namespace TicTacToeCLI{
                     switch (_gameWinnerService.Validate(_gameBoard)){
                         case 'X': winner = "Player 1"; break;
                         case 'O': winner = "Player 2"; break;
-                        default: winner = "no one"; break;
+                        default: winner = "No one"; break;
                     }
                     Console.WriteLine("\nCongratulations, " + winner +
                                       " wins!\n\n\nPress any key to close the game");
@@ -133,6 +126,15 @@ namespace TicTacToeCLI{
 
             string input = Console.ReadLine().ToLower();
             return input;
+        }
+
+        private void UpdateGameBoard(){
+
+            gameBoard = "\n\n    1   2   3\n\nA   " + _gameBoard[0, 0] + " | " + _gameBoard[0, 1] +
+                                " | " + _gameBoard[0, 2] + " \n" + "   ---+---+---\nB   " + _gameBoard[1, 0] +
+                                " | " + _gameBoard[1, 1] + " | " + _gameBoard[1, 2] + " \n" +
+                                "   ---+---+---\nC   " + _gameBoard[2, 0] + " | " + _gameBoard[2, 1] +
+                                " | " + _gameBoard[2, 2] + "\n\n";
         }
 
         private void ShowMenu(string gameBoard){
